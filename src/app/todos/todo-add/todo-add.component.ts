@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { AppState } from 'src/app/app.reducer';
+import { Store } from '@ngrx/store';
+import * as ActionTodo from '../todo.actions';
+
+
 @Component({
   selector: 'app-todo-add',
   templateUrl: './todo-add.component.html',
@@ -9,7 +14,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class TodoAddComponent implements OnInit {
 
   form: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.crearFormulario();
@@ -19,14 +24,22 @@ export class TodoAddComponent implements OnInit {
 
   crearFormulario(){
    this.form = this.fb.group({
-    todo: ['']
+    todo: ['', Validators.required]
    });
   }
 
   actualizarFormulario(){
     this.form.reset({
-      todo: ['hola']
+      todo: ''
     });
+  }
+
+  agregar(){
+    if (this.form.get('todo').invalid) {
+      return;
+    }
+    this.store.dispatch(ActionTodo.crear({texto: this.form.get('todo').value}));
+    this.form.get('todo').setValue('');
   }
 
   formListener(){
