@@ -7,6 +7,7 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
 import { TodoPageComponent } from './todo-page/todo-page.component';
 import { TodoFooterComponent } from './todo-footer/todo-footer.component';
 
+
 @NgModule({
   declarations: [
     TodoAddComponent,
@@ -18,7 +19,7 @@ import { TodoFooterComponent } from './todo-footer/todo-footer.component';
   imports: [
     CommonModule
   ],
-  exports:[
+  exports: [
     TodoPageComponent
   ]
 })
