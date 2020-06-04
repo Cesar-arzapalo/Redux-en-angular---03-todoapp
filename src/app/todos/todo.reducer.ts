@@ -4,7 +4,7 @@ import { Todo } from './models/todo.model';
 import { Action } from 'rxjs/internal/scheduler/Action';
 
 
-export const initialState: Todo[] =  [];
+export const initialState: Todo[] =  [new Todo('salvar al mundo'), new Todo('reunir piedras')];
 
 const _TODO_REDUCER = createReducer(
     initialState,     on(crear, (state, {texto}) => [ ...state, new Todo(texto)])
